@@ -1,0 +1,29 @@
+pipeline {
+    agent {
+        label 'docker'
+    }
+    stages {
+        stage("verify installation") {
+            steps {
+                sh '''
+                    docker version
+                    docker info
+                    docker-compose version
+                    curl --version
+                    jq --version
+                '''
+            }
+        }
+        stage('prune docker data') {
+            steps {
+                sh 'docker system prune -a --volume -f'
+            }
+        }
+        stage('starting container') {
+            steps {
+                sh 'docker-compose up -d --no-color --wait'
+                sh 'docker-compose ps'
+            }
+        }
+    }
+}
