@@ -3,7 +3,7 @@ pipeline {
         label 'ubuntuwrk'
     }
     stages {
-        stage('verify installation') {
+        stage("verify installation") {
             steps {
                 sh '''
                     docker version
@@ -15,14 +15,14 @@ pipeline {
             }
         }
         stage('prune docker data') {
+    steps {
+        sh 'docker volume prune -f'
+    }
+}
+            
+       stage('starting container') {
             steps {
-                sh 'docker system prune -f'
-            }
-        }
-        stage('starting container') {
-            steps {
-                sh 'cd /root/jenkinswork/'
-                sh 'docker-compose up -d'
+                sh 'docker-compose up -d --no-color --wait'
                 sh 'docker-compose ps'
             }
         }
