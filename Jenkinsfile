@@ -21,9 +21,9 @@ pipeline {
         }
         stage('starting container') {
             steps {
-                sh 'cd /root/jenkinswork/'
-                sh 'docker-compose up -d'
-                sh 'docker-compose ps'
+                sh 'mkdir /home/ubuntu20/jenkinswork'
+                sh 'cd /home/ubuntu20/jenkinswork/ '
+                sh 'touch testjn.txt'
             }
         }
     }
