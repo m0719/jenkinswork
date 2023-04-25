@@ -21,9 +21,9 @@ pipeline {
         }
         stage('starting container') {
             steps {
-                sh 'mkdir /home/ubuntu20/jenkinswork2'
-                sh 'cd /home/ubuntu20/jenkinswork2/ '
-                sh 'touch /home/ubuntu20/jenkinswork2/testjn.txt'
+                sh 'mkdir /home/ubuntu20/jenkinswork3'
+                sh 'cd /home/ubuntu20/jenkinswork3/ '
+                sh 'touch /home/ubuntu20/jenkinswork3/testjn.txt'
                 sh 'docker-compose -f /home/ubuntu20/jenkinswork/docker-compose.yaml up -d'
                 sh 'docker ps -a'
             }
