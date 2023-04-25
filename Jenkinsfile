@@ -1,6 +1,6 @@
 pipeline {
     agent {
-        label 'docker'
+        label 'ubuntuwrk'
     }
     stages {
         stage("verify installation") {
