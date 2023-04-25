@@ -3,7 +3,7 @@ pipeline {
         label 'ubuntuwrk'
     }
     stages {
-        stage("verify installation") {
+        stage('verify installation') {
             steps {
                 sh '''
                     docker version
@@ -16,7 +16,7 @@ pipeline {
         }
         stage('prune docker data') {
             steps {
-                sh 'docker system prune -a --volume -f'
+                sh 'docker volume prune -f'
             }
         }
         stage('starting container') {
