@@ -1,4 +1,3 @@
-node('docker'){
 pipeline {
     agent {
         label 'docker'
@@ -20,6 +19,11 @@ pipeline {
                 sh 'docker system prune -a --volume -f'
             }
         }
+        stage('Testing against the container') {
+            steps {
+                sh 'curl http://localhost:125 | jq'
+            }
+        }
         stage('starting container') {
             steps {
                 sh 'docker-compose up -d --no-color --wait'
@@ -27,5 +31,4 @@ pipeline {
             }
         }
     }
-}
 }
