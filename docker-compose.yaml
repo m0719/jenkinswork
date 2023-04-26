@@ -1,8 +1,8 @@
 version: '3'
 services:
   httpd:
-    image: httpd:latest
+    image: learnitguide/busapp 
     ports:
-      - "125:80"
+      - "126:80"
     volumes:
       - ./public-html:/usr/local/apache2/htdocs/
