@@ -1,7 +1,7 @@
 version: '3'
 services:
   httpd:
-    image: learnitguide/busapp:2.1.5
+    image: learnitguide/busapp:2.6
     ports:
       - "126:8001"
     volumes:
