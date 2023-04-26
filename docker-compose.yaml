@@ -3,6 +3,6 @@ services:
   httpd:
     image: learnitguide/busapp 
     ports:
-      - "126:80"
+      - "126:3000"
     volumes:
       - ./public-html:/usr/local/apache2/htdocs/
