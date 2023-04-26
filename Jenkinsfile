@@ -3,7 +3,7 @@ pipeline {
         label 'ubuntuwrk'
     }
     stages {
-        stage('verify installation') {
+        stage("verify installation") {
             steps {
                 sh '''
                     docker version
@@ -15,17 +15,15 @@ pipeline {
             }
         }
         stage('prune docker data') {
+    steps {
+        sh 'docker system prune -f'
+    }
+}
+
+       stage('starting container') {
             steps {
-                sh 'docker system prune -f'
-            }
-        }
-        stage('starting container') {
-            steps {
-                sh 'mkdir /home/ubuntu20/jenkinswork1'
-                sh 'cd /home/ubuntu20/jenkinswork1/ '
-                sh 'touch /home/ubuntu20/jenkinswork1/testjn.txt'
-                sh 'docker-compose -f ~/jenkinswork/docker-compose.yaml up -d'
-                sh 'docker ps -a'
+                sh 'docker-compose up -d'
+                sh 'docker-compose ps'
             }
         }
     }
