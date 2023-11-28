@@ -1,29 +1,19 @@
 pipeline {
-    agent {
-        label 'ubuntuwrk'
-    }
+    agent any
+
     stages {
-        stage("verify installation") {
+        stage('Checkout') {
             steps {
-                sh '''
-                    docker version
-                    docker info
-                    docker-compose version
-                    curl --version
-                    jq --version
-                '''
+                git branch: 'main', url: 'https://github.com/m0719/jenkinswork.git'
             }
         }
-        stage('prune docker data') {
-    steps {
-        sh 'docker system prune -f'
-    }
-}
-
-       stage('starting container') {
+        
+        stage('Build and Test') {
             steps {
-                sh 'docker-compose up -d'
-                sh 'docker-compose ps'
+                script {
+                    // Assuming docker-compose.yml is in the root directory of the repository
+                    bat 'docker-compose up -d'  // Use -d for detached mode, if needed
+                }
             }
         }
     }
